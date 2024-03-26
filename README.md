@@ -1,9 +1,8 @@
 ```html
 <!--local script-->
-<script src="http://localhost:5173/main.js"></script>
+<script src="http://localhost:5173/src/main.js"></script>
 
 <!--github pages script-->
-
 <script>
   if (typeof vite === "undefined") {
     // add JS code to end of body
