@@ -25,4 +25,21 @@
 
 window.vite = "vite";
 
-console.log(vite);
+(function ($) {
+  console.log("LOCAL_SCRIPT_LOADED");
+
+  const swiper = new Swiper(".swiper", {
+    // Optional parameters
+    // direction: "vertical",
+    loop: false,
+
+    // If we need pagination
+    pagination: {},
+
+    // Navigation arrows
+    navigation: {},
+
+    // And if we need scrollbar
+    scrollbar: {},
+  });
+})(jQuery);
