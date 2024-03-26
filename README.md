@@ -9,7 +9,7 @@
     // add JS code to end of body
     let script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "https://getonnet.github.io/ads-calculator-2024-custom-code/dist/script.js";
+    script.src = "https://getonnet.github.io/ads-calculator-2024-custom-code/dist/assets/index.js";
     document.body.appendChild(script);
   }
 </script>
