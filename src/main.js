@@ -1,7 +1,9 @@
 import "./style.css";
-// import javascriptLogo from "../javascript.svg";
-// import viteLogo from "/vite.svg";
-// import { setupCounter } from "./counter.js";
+import { slide1 } from "./slide1";
+import { slide2 } from "./slide2.js";
+import { slide3 } from "./slide3.js";
+import { slide4 } from "./slide4.js";
+import { slide5 } from "./slide5.js";
 
 window.vite = "vite";
 
@@ -48,129 +50,17 @@ window.vite = "vite";
   });
 
   // step 1 logics
-  $(".marketing-calc_content-wrapper .main-button").on("click", function () {
-    // TODO: save choice to database
-    customSlider.slideNext();
-  });
+  slide1(customSlider);
 
-  /**
-   * step 2 logics
-   * TODO: THIS is firing twice, possibly due to the click event on the label
-   * TODO: optimize this in future
-   */
-  function updateStep2SelectionAndGotoNextStep() {
-    console.count("RUNNING FUNC STEP 2");
+  // step 2 logics
+  slide2(customSlider);
 
-    // TODO: save choice to database
+  // step 3 logics
+  slide3(customSlider);
 
-    // get all checked radio buttons
-    const checkedRadioButtons = $(".marketing-calc_content-wrapper_page-2 input:checked");
-    const checkedLabel = $(this).closest("label");
+  // step 4 logics
+  slide4(customSlider);
 
-    // animate and go to next step
-    if (checkedRadioButtons.length > 0) {
-      checkedLabel
-        .animate({ opacity: 0 }, 50)
-        .delay(50)
-        .animate({ opacity: 1 }, 50)
-        .delay(50)
-        .animate({ opacity: 0 }, 50)
-        .delay(50)
-        .animate({ opacity: 1 }, 50)
-        .delay(50)
-        .animate({ opacity: 0 }, 50)
-        .delay(50)
-        .animate({ opacity: 1 }, 50);
-
-      setTimeout(() => {
-        customSlider.slideTo(2);
-      }, 800);
-    }
-  }
-
-  $(".marketing-calc_content-wrapper_page-2 label").on("click", updateStep2SelectionAndGotoNextStep);
-
-  /**
-   * step 3 logics
-   */
-  $(".marketing-calc_content-wrapper_page-3 label").on("click", function (e) {
-    // take over webflow's default click event
-    e.preventDefault();
-    const $input = $(this).find("input");
-    $input.prop("checked", !$input.prop("checked"));
-    // handle the checked state
-    if ($input.is(":checked")) {
-      $input.prev().addClass("w--redirected-checked");
-    } else $input.prev().removeClass("w--redirected-checked");
-
-    // if "platform-others" is checked, uncheck all other checkboxes
-    if ($input.attr("name") === "platform-others" && $input.is(":checked")) {
-      console.log("PLATFORM OTHERS is CLICKED");
-      // Uncheck all other checkboxes except "platform-others"
-      $(this)
-        .closest("form")
-        .find("input[type='checkbox']")
-        .not($input)
-        .prop("checked", false)
-        .prev()
-        .removeClass("w--redirected-checked");
-    } else {
-      // uncheck "platform-others" if any other checkbox is checked
-      if ($input.attr("name") !== "platform-others" && $input.is(":checked")) {
-        console.log("OTHERS is CLICKED");
-        $(this)
-          .closest("form")
-          .find("input[name='platform-others']")
-          .prop("checked", false)
-          .prev()
-          .removeClass("w--redirected-checked");
-      }
-    }
-  });
-
-  // goto next step
-  $(".marketing-calc_content-wrapper_page-3 .main-button").on("click", function (e) {
-    e.preventDefault();
-    // check if at least one checkbox is checked
-    const $checkedCheckboxes = $(".marketing-calc_content-wrapper_page-3 input:checked");
-    if ($checkedCheckboxes.length === 0) {
-      // set errors
-      // throw new error("Please select at least one option");
-      throw new Error("Please select at least one option");
-    } else {
-      customSlider.slideNext();
-    }
-  });
-
-  /**
-   * -------------------------------------------------------------------------------
-   * step 4 logics
-   */
-  // reinit finsweet range slider
-  customSlider.on("slideChange", function () {
-    if (customSlider.activeIndex === 3) {
-      console.log("REINIT RANGE SLIDER");
-
-      setTimeout(function () {
-        if (typeof window.fsAttributes !== "undefined") window.fsAttributes.rangeslider.init();
-        else console.error("Finsweet range slider not found");
-      }, 1000);
-
-      // fire window resize event to fix the range slider
-      $(window).trigger("resize");
-    }
-  });
-
-  $(".marketing-calc_content-wrapper_page-4 .main-button").on("click", function (e) {
-    e.preventDefault();
-    customSlider.slideNext();
-  });
-
-  /**
-   * step 5 logics
-   */
-  $(".marketing-calc_content-wrapper_page-5 .pricing-button").on("click", function (e) {
-    e.preventDefault();
-    customSlider.slideNext();
-  });
+  // step 5 logics
+  slide5(customSlider);
 })(jQuery);

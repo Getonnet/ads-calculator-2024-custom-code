@@ -1,1 +1,1 @@
-.status-bar_rectangle{position:relative;overflow:hidden}.status-bar_rectangle:after{content:"";position:absolute;height:100%;width:100%;background:#d72638;left:-100%;transition:all .3s linear}.status-bar_rectangle.active:after{left:0%}
+.status-bar_rectangle{position:relative;overflow:hidden}.status-bar_rectangle:after{content:"";display:block;position:absolute;height:100%;width:100%;background:#d72638;left:-100%;transition:all .3s linear}.status-bar_rectangle.active:after{left:0%}
