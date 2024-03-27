@@ -11,23 +11,18 @@ window.vite = "vite";
    * get all progress bars
    * this will be filled on slide change
    */
-  const progressBarForStep1 = $("[step='1']").find(".status-bar_rectangle").first();
-  const progressBarForStep2 = $("[step='2']").find(".status-bar_rectangle").first();
-  const progressBarForStep3 = $("[step='3']").find(".status-bar_rectangle").first();
-  const progressBarForStep4 = $("[step='4']").find(".status-bar_rectangle").first();
-  const progressBarForStep5 = $("[step='5']").find(".status-bar_rectangle").first();
+  const statusBars = $(".status-bar_rectangle");
+  const progressBarForStep1 = $("[step='1']").find(statusBars).first();
+  const progressBarForStep2 = $("[step='2']").find(statusBars).first();
+  const progressBarForStep3 = $("[step='3']").find(statusBars).first();
+  const progressBarForStep4 = $("[step='4']").find(statusBars).first();
+  const progressBarForStep5 = $("[step='5']").find(statusBars).first();
 
   const customSlider = new Swiper(".swiper", {
     loop: false,
     rewind: false,
-    draggable: true, // turn off on live or testing
-
-    // If we need pagination
-    pagination: {},
-    // Navigation arrows
-    navigation: {},
-    // And if we need scrollbar
-    scrollbar: {},
+    allowTouchMove: false,
+    noSwipingClass: "swiper-no-swiping",
   });
 
   customSlider.on("slideChange", function () {
@@ -98,14 +93,74 @@ window.vite = "vite";
   /**
    * step 3 logics
    */
+  $(".marketing-calc_content-wrapper_page-3 label").on("click", function (e) {
+    // take over webflow's default click event
+    e.preventDefault();
+    const $input = $(this).find("input");
+    $input.prop("checked", !$input.prop("checked"));
+    // handle the checked state
+    if ($input.is(":checked")) {
+      $input.prev().addClass("w--redirected-checked");
+    } else $input.prev().removeClass("w--redirected-checked");
+
+    // if "platform-others" is checked, uncheck all other checkboxes
+    if ($input.attr("name") === "platform-others" && $input.is(":checked")) {
+      console.log("PLATFORM OTHERS is CLICKED");
+      // Uncheck all other checkboxes except "platform-others"
+      $(this)
+        .closest("form")
+        .find("input[type='checkbox']")
+        .not($input)
+        .prop("checked", false)
+        .prev()
+        .removeClass("w--redirected-checked");
+    } else {
+      // uncheck "platform-others" if any other checkbox is checked
+      if ($input.attr("name") !== "platform-others" && $input.is(":checked")) {
+        console.log("OTHERS is CLICKED");
+        $(this)
+          .closest("form")
+          .find("input[name='platform-others']")
+          .prop("checked", false)
+          .prev()
+          .removeClass("w--redirected-checked");
+      }
+    }
+  });
+
+  // goto next step
   $(".marketing-calc_content-wrapper_page-3 .main-button").on("click", function (e) {
     e.preventDefault();
-    customSlider.slideNext();
+    // check if at least one checkbox is checked
+    const $checkedCheckboxes = $(".marketing-calc_content-wrapper_page-3 input:checked");
+    if ($checkedCheckboxes.length === 0) {
+      // set errors
+      // throw new error("Please select at least one option");
+      throw new Error("Please select at least one option");
+    } else {
+      customSlider.slideNext();
+    }
   });
 
   /**
+   * -------------------------------------------------------------------------------
    * step 4 logics
    */
+  // reinit finsweet range slider
+  customSlider.on("slideChange", function () {
+    if (customSlider.activeIndex === 3) {
+      console.log("REINIT RANGE SLIDER");
+
+      setTimeout(function () {
+        if (typeof window.fsAttributes !== "undefined") window.fsAttributes.rangeslider.init();
+        else console.error("Finsweet range slider not found");
+      }, 1000);
+
+      // fire window resize event to fix the range slider
+      $(window).trigger("resize");
+    }
+  });
+
   $(".marketing-calc_content-wrapper_page-4 .main-button").on("click", function (e) {
     e.preventDefault();
     customSlider.slideNext();
