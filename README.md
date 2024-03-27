@@ -6,10 +6,10 @@
 <script>
   if (typeof vite === "undefined") {
     // add css to head
-    let stylesheet = document.createElement("style");
-    stylesheet.rel = "stylesheet";
-    stylesheet.href = "https://getonnet.github.io/ads-calculator-2024-custom-code/dist/assets/index.css";
-    document.head.appendChild(stylesheet);
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://getonnet.github.io/ads-calculator-2024-custom-code/dist/assets/index.css";
+    document.head.appendChild(link);
 
     // add JS code to end of body
     let script = document.createElement("script");
