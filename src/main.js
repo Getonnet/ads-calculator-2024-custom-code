@@ -49,6 +49,12 @@ window.vite = "vite";
     }
   });
 
+  // go back button - specific code
+  const goBackButton = $(".back-btn");
+  goBackButton.on("click", function () {
+    customSlider.slidePrev();
+  });
+
   // step 1 logics
   slide1(customSlider);
 
