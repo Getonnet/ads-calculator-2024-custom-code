@@ -1,9 +1,11 @@
+import "./nouislider.min.css";
 import "./style.css";
 import { slide1 } from "./slide1";
 import { slide2 } from "./slide2.js";
 import { slide3 } from "./slide3.js";
 import { slide4 } from "./slide4.js";
 import { slide5 } from "./slide5.js";
+import { priceSlider } from "./priceSlider.js";
 
 window.vite = "vite";
 
@@ -48,12 +50,16 @@ window.vite = "vite";
       progressBarForStep5.addClass("active");
     }
   });
+  customSlider.slideTo(3);
 
   // go back button - specific code
   const goBackButton = $(".back-btn");
   goBackButton.on("click", function () {
     customSlider.slidePrev();
   });
+
+  // init price slider
+  priceSlider();
 
   // step 1 logics
   slide1(customSlider);

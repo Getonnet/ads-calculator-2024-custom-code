@@ -12,5 +12,8 @@
     "@types/jquery": "^3.5.29",
     "prettier": "3.2.5",
     "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "nouislider": "^15.7.1"
   }
 }
