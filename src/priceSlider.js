@@ -1,11 +1,10 @@
 import noUiSlider from "nouislider";
 
-const handlesSlider = document.getElementById("price-slider");
-
 export function priceSlider() {
+  const handlesSlider = document.getElementById("price-slider");
   noUiSlider.create(handlesSlider, {
-    connect: true,
     start: 0,
+    connect: [true, false],
     step: 1,
     range: {
       min: 0,

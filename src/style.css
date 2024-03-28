@@ -82,3 +82,12 @@
   background: #fff;
   border-radius: 50%;
 }
+.noUi-value-horizontal {
+  display: none;
+}
+
+.noUi-marker-horizontal.noUi-marker-large {
+  background: rgba(217, 217, 217, 1);
+  height: 12px;
+  width: 1px;
+}

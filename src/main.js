@@ -1,5 +1,6 @@
 import "./nouislider.min.css";
 import "./style.css";
+
 import { slide1 } from "./slide1";
 import { slide2 } from "./slide2.js";
 import { slide3 } from "./slide3.js";
