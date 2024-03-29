@@ -51,7 +51,6 @@ window.vite = "vite";
       progressBarForStep5.addClass("active");
     }
   });
-  customSlider.slideTo(3);
 
   // go back button - specific code
   const goBackButton = $(".back-btn");
