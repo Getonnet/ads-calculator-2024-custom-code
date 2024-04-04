@@ -19,3 +19,7 @@
   }
 </script>
 ```
+
+`git acp` is a custom git alias for `git add`, `git commit` & `git push`.
+If you dont create a customa alias, that command wont work. In this case
+you can run `pnpm build` and then, push to github manually.

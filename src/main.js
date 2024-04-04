@@ -1,12 +1,14 @@
 import "./nouislider.min.css";
 import "./style.css";
 
-import { slide1 } from "./slide1";
+import { slide0 } from "./slide0.js";
+import { slide1 } from "./slide1.js";
 import { slide2 } from "./slide2.js";
 import { slide3 } from "./slide3.js";
 import { slide4 } from "./slide4.js";
-import { slide5 } from "./slide5.js";
 import { priceSlider } from "./priceSlider.js";
+import { slide6 } from "./slide6.js";
+import { popups } from "./popups.js";
 
 window.vite = "vite";
 
@@ -22,6 +24,7 @@ window.vite = "vite";
   const progressBarForStep3 = $("[step='3']").find(statusBars).first();
   const progressBarForStep4 = $("[step='4']").find(statusBars).first();
   const progressBarForStep5 = $("[step='5']").find(statusBars).first();
+  const $thanksPopup = $(".thankyou-popup");
 
   const customSlider = new Swiper(".swiper", {
     loop: false,
@@ -29,6 +32,8 @@ window.vite = "vite";
     allowTouchMove: false,
     noSwipingClass: "swiper-no-swiping",
   });
+
+  customSlider.slideTo(5);
 
   customSlider.on("slideChange", function () {
     const activeSlide = customSlider.activeIndex;
@@ -62,17 +67,29 @@ window.vite = "vite";
   priceSlider();
 
   // step 1 logics
-  slide1(customSlider);
+  slide0(customSlider);
 
   // step 2 logics
-  slide2(customSlider);
+  slide1(customSlider);
 
   // step 3 logics
-  slide3(customSlider);
+  slide2(customSlider);
 
   // step 4 logics
-  slide4(customSlider);
+  slide3(customSlider);
 
   // step 5 logics
-  slide5(customSlider);
+  slide4(customSlider);
+
+  /**
+   * ---------------------------------------
+   * popup triggers / management: help-popup
+   */
+  popups();
+
+  /**
+   * ---------------------------------------
+   * Final submit
+   */
+  slide6($thanksPopup);
 })(jQuery);
