@@ -1,3 +1,5 @@
+import { setValue } from "./utils.js";
+
 export function initSlide4(customSlider) {
   $(".marketing-calc_content-wrapper_page-5 .pricing-button").on("click", function (e) {
     e.preventDefault();
@@ -63,8 +65,10 @@ export function initSlide4(customSlider) {
       $errorMessage.hide();
       // submit the form
       setTimeout(() => {
-        console.warn("Form submitted successfully");
+        console.warn("user information saved successfully");
         hideLoadingState();
+        // save to local storage
+        setValue("step5", JSON.stringify(data));
         customSlider.slideTo(5);
       }, 2000);
     }

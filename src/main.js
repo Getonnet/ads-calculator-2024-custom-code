@@ -10,6 +10,7 @@ import { initPriceSlider } from "./priceSlider.js";
 import { initSlide6 } from "./slide6.js";
 import { initPopups } from "./popups.js";
 import { pageSlider } from "./page-slider.js";
+import { initSlide5 } from "./slide5.js";
 
 // config settings
 window.vite = "vite";
@@ -24,6 +25,7 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 
   // init page slider
   const customSlider = pageSlider();
+  customSlider.slideTo(5);
 
   $.ajax({
     url: settingsApi,
@@ -58,6 +60,9 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
   // step 5 logics
   initSlide4(customSlider);
 
-  // step 6: Final submit
+  // step 6 logics
+  initSlide5(customSlider);
+
+  // step 7: Final submit
   initSlide6();
 })(jQuery);
