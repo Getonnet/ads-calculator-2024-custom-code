@@ -17,8 +17,6 @@ export function pageSlider() {
     noSwipingClass: "swiper-no-swiping",
   });
 
-  // slider.slideTo(5);
-
   slider.on("slideChange", function () {
     const activeSlide = slider.activeIndex;
     if (activeSlide === 0) {

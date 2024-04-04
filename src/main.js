@@ -1,16 +1,16 @@
 import "./nouislider.min.css";
 import "./style.css";
 
+import { pageSlider } from "./page-slider.js";
 import { initSlide0 } from "./slide0.js";
 import { initSlide1 } from "./slide1.js";
 import { initslide2 } from "./slide2.js";
 import { initSlide3 } from "./slide3.js";
 import { initSlide4 } from "./slide4.js";
-import { initPriceSlider } from "./priceSlider.js";
 import { initSlide6 } from "./slide6.js";
 import { initPopups } from "./popups.js";
-import { pageSlider } from "./page-slider.js";
 import { initSlide5 } from "./slide5.js";
+import { initPriceSlider } from "./priceSlider.js";
 
 // config settings
 window.vite = "vite";
@@ -21,11 +21,11 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 // main script
 (function ($) {
   console.log("LOCAL_SCRIPT_LOADED");
+
   let settingsData = {};
 
   // init page slider
   const customSlider = pageSlider();
-  customSlider.slideTo(5);
 
   $.ajax({
     url: settingsApi,

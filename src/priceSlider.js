@@ -61,8 +61,6 @@ export function initPriceSlider(priceRange = defaultPriceRange) {
   // });
 
   handlesSlider.noUiSlider.on("update", function (values, handle) {
-    console.log(values[handle]);
-
     const price = priceRange[Number(values[handle])]?.value || "N/A";
 
     // save value to local storage

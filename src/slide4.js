@@ -54,8 +54,6 @@ export function initSlide4(customSlider) {
       }
     });
 
-    console.log(data);
-
     // if a field is empty, do not submit & show error
     if (Object.values(data).includes("")) {
       console.error("Please fill all fields");

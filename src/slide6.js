@@ -3,6 +3,12 @@ export function initSlide6() {
   const $finalSubmitBtn = $("#final-submit-btn");
   const $finalLoader = $finalSubmitBtn.find(".loader");
 
+  const currentStep = $(".marketing-calc_content-wrapper_page-7");
+  const $numberOfAds = currentStep.find(".number-of-ads").first();
+  const $numberOfViews = currentStep.find(".number-of-views").first();
+  const $numberOfVisitors = currentStep.find(".number-of-visitors").first();
+  const $numberOfConversion = currentStep.find(".number-of-conversion").first();
+
   $finalSubmitBtn.on("click", function (e) {
     e.preventDefault();
     $finalLoader.show();

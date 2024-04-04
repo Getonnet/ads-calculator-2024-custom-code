@@ -1,7 +1,6 @@
 import { setValue } from "./utils.js";
 
 export function initSlide0(customSlider) {
-  console.log("initSlide0");
   $(".marketing-calc_content-wrapper .main-button").on("click", function () {
     // save selected values to local storage
     setValue("step1", $(this).attr("data-val"));
