@@ -15,8 +15,7 @@ import { pageSlider } from "./page-slider.js";
 window.vite = "vite";
 
 // api settings
-const apiBaseUrl = "https://marketing-calc-admin-2024.vercel.app";
-const apiSettings = "/api/settings";
+const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 
 // main script
 (function ($) {
@@ -25,9 +24,15 @@ const apiSettings = "/api/settings";
   // init page slider
   const customSlider = pageSlider();
 
-  // get data from api
-  $.get(apiBaseUrl + apiSettings, function (data) {
-    console.log(data);
+  $.ajax({
+    url: settingsApi,
+    type: "GET",
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (error) {
+      console.error(error);
+    },
   });
 
   // init price slider
