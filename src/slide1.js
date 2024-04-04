@@ -1,3 +1,5 @@
+import { setRadioValue } from "./utils.js";
+
 export function initSlide1(customSlider) {
   /**
    * step 2 logics
@@ -5,13 +7,14 @@ export function initSlide1(customSlider) {
    * TODO: optimize this in future
    */
   function updateStep2SelectionAndGotoNextStep() {
-    console.count("RUNNING FUNC STEP 2");
-
-    // TODO: save choice to database
+    // console.count("RUNNING FUNC STEP 2");
 
     // get all checked radio buttons
     const checkedRadioButtons = $(".marketing-calc_content-wrapper_page-2 input:checked");
     const checkedLabel = $(this).closest("label");
+
+    // save selected values to local storage
+    setRadioValue("step2", checkedRadioButtons);
 
     // animate and go to next step
     if (checkedRadioButtons.length > 0) {

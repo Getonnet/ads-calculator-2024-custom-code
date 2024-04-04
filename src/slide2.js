@@ -42,9 +42,12 @@ export function initslide2(customSlider) {
     e.preventDefault();
     // check if at least one checkbox is checked
     const $checkedCheckboxes = $(".marketing-calc_content-wrapper_page-3 input:checked");
+    // save the checked checkboxes to local storage
+    const checkedCheckboxes = $checkedCheckboxes.map((i, el) => $(el).attr("name")).get();
+    localStorage.setItem("step3", JSON.stringify(checkedCheckboxes));
+
     if ($checkedCheckboxes.length === 0) {
       // set errors
-      // throw new error("Please select at least one option");
       throw new Error("Please select at least one option");
     } else {
       customSlider.slideNext();

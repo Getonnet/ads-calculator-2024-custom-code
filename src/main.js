@@ -20,6 +20,7 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 // main script
 (function ($) {
   console.log("LOCAL_SCRIPT_LOADED");
+  let settingsData = {};
 
   // init page slider
   const customSlider = pageSlider();
@@ -28,7 +29,8 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
     url: settingsApi,
     type: "GET",
     success: function (data) {
-      console.log(data);
+      console.log(JSON.parse(data));
+      settingsData = JSON.parse(data);
     },
     error: function (error) {
       console.error(error);
