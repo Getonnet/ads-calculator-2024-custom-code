@@ -33,7 +33,7 @@ window.vite = "vite";
     noSwipingClass: "swiper-no-swiping",
   });
 
-  customSlider.slideTo(5);
+  // customSlider.slideTo(5);
 
   customSlider.on("slideChange", function () {
     const activeSlide = customSlider.activeIndex;
