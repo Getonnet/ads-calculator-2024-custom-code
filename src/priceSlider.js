@@ -1,6 +1,6 @@
 import noUiSlider from "nouislider";
 
-export function priceSlider() {
+export function initPriceSlider() {
   const handlesSlider = document.getElementById("price-slider");
   noUiSlider.create(handlesSlider, {
     start: 0,

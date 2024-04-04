@@ -1,4 +1,4 @@
-export function slide3(customSlider) {
+export function initSlide3(customSlider) {
   const priceDisplay = $(".marketing-calc_content-wrapper_page-4 .price-range");
 
   // go to next step

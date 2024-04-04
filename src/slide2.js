@@ -1,4 +1,4 @@
-export function slide2(customSlider) {
+export function initslide2(customSlider) {
   $(".marketing-calc_content-wrapper_page-3 label").on("click", function (e) {
     // take over webflow's default click event
     e.preventDefault();

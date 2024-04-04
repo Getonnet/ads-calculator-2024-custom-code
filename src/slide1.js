@@ -1,4 +1,4 @@
-export function slide1(customSlider) {
+export function initSlide1(customSlider) {
   /**
    * step 2 logics
    * TODO: THIS is firing twice, possibly due to the click event on the label

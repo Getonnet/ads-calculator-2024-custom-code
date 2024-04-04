@@ -1,4 +1,5 @@
-export function slide6($confirmationPopup) {
+export function initSlide6() {
+  const $thanksPopup = $(".thankyou-popup");
   const $finalSubmitBtn = $("#final-submit-btn");
   const $finalLoader = $finalSubmitBtn.find(".loader");
 
@@ -14,7 +15,7 @@ export function slide6($confirmationPopup) {
 
     setTimeout(() => {
       console.warn("Final submit successful");
-      $confirmationPopup.fadeIn(150);
+      $thanksPopup.fadeIn(150);
       setTimeout(function () {
         $finalLoader.hide();
         $finalLoader.siblings().css({
