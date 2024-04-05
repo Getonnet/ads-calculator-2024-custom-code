@@ -1,4 +1,6 @@
-export function initslide2(customSlider) {
+import { setValue } from "./utils.js";
+
+export function initSlide2(customSlider, prices) {
   $(".marketing-calc_content-wrapper_page-3 label").on("click", function (e) {
     // take over webflow's default click event
     e.preventDefault();
@@ -42,9 +44,13 @@ export function initslide2(customSlider) {
     e.preventDefault();
     // check if at least one checkbox is checked
     const $checkedCheckboxes = $(".marketing-calc_content-wrapper_page-3 input:checked");
+
     // save the checked checkboxes to local storage
     const checkedCheckboxes = $checkedCheckboxes.map((i, el) => $(el).attr("name")).get();
-    localStorage.setItem("step3", JSON.stringify(checkedCheckboxes));
+    setValue("step3", JSON.stringify(checkedCheckboxes));
+    setValue("step3Total", getPlatformsTotal(checkedCheckboxes, prices));
+    // calculate ad_spend
+    setValue("ad_spend", checkedCheckboxes.length * Number(prices["costPerPlatform"]));
 
     if ($checkedCheckboxes.length === 0) {
       // set errors
@@ -53,4 +59,59 @@ export function initslide2(customSlider) {
       customSlider.slideNext();
     }
   });
+}
+
+// const step3Prices = {
+//   baseTotalDivideBy: 6,
+//   bing: 4760,
+//   costPerPlatform: 3000,
+//   facebook: 2975,
+//   facebookAndInstagram: 2975,
+//   google: 4760,
+//   googleAndBing: 7735,
+//   instagram: 2975,
+//   linkedIn: 2975,
+//   snapchat: 2975,
+//   tikTok: 2975,
+//   youtube: 2975,
+// };
+
+const priceMap = {
+  "platform-google": "google",
+  "platform-facebook": "facebook",
+  "platform-instagram": "instagram",
+  "platform-linkedin": "linkedIn",
+  "platform-tiktok": "tikTok",
+  "platform-youtube": "youtube",
+  "platform-snapchat": "snapchat",
+  "platform-bing": "bing",
+  "platform-others": "platform-others",
+};
+
+function getPlatformsTotal(values, prices) {
+  if (values.length === 0 || values.includes("platform-others")) return 0;
+
+  let total = 0;
+
+  values.forEach((item) => {
+    const platform = priceMap[item];
+    const platformPrice = prices[platform];
+    total += +platformPrice;
+  });
+
+  // if facebook and instagram both selected
+  if (values.includes("platform-facebook") && values.includes("platform-instagram")) {
+    total -= +prices["facebook"];
+    total -= +prices["instagram"];
+    total += +prices["facebookAndInstagram"];
+  }
+
+  // if google and bing both are selected
+  if (values.includes("platform-google") && values.includes("platform-bing")) {
+    total -= +prices["google"];
+    total -= +prices["bing"];
+    total += +prices["googleAndBing"];
+  }
+
+  return total / +prices["baseTotalDivideBy"];
 }

@@ -1,6 +1,7 @@
-import { setRadioValue } from "./utils.js";
+import { setRadioValue, setValue } from "./utils.js";
 
-export function initSlide1(customSlider) {
+export function initSlide1(customSlider, prices, baseDivider) {
+  console.log(prices);
   /**
    * step 2 logics
    * TODO: THIS is firing twice, possibly due to the click event on the label
@@ -14,7 +15,11 @@ export function initSlide1(customSlider) {
     const checkedLabel = $(this).closest("label");
 
     // save selected values to local storage
-    setRadioValue("step2", checkedRadioButtons);
+    const selectedVal = setRadioValue("step2", checkedRadioButtons);
+
+    // set total
+    const amountToAddWithTotal = selectedVal && selectedVal === "true" ? prices["priceForYes"] : prices["priceForNo"];
+    setValue("step2total", amountToAddWithTotal / baseDivider);
 
     // animate and go to next step
     if (checkedRadioButtons.length > 0) {

@@ -15,8 +15,14 @@ export function clearValues() {
 }
 
 export function setRadioValue(name, checkedRadioButtons) {
+  let selectedValue;
   checkedRadioButtons.each((index, element) => {
     const value = $(element).val();
+    selectedValue = value;
     localStorage.setItem(name, value);
   });
+  return selectedValue;
 }
+
+// export function setTotalPrice() {
+// }
