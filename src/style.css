@@ -91,3 +91,14 @@
   height: 12px;
   width: 1px;
 }
+
+/* Country select dropdown */
+#iti-0__country-listbox {
+  border-radius: 8px;
+  border: none;
+  overflow: auto;
+}
+.iti.iti--allow-dropdown {
+  width: 100%;
+  margin-top: -8px;
+}

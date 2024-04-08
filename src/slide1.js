@@ -1,7 +1,6 @@
 import { setRadioValue, setValue } from "./utils.js";
 
 export function initSlide1(customSlider, prices, baseDivider) {
-  console.log(prices);
   /**
    * step 2 logics
    * TODO: THIS is firing twice, possibly due to the click event on the label

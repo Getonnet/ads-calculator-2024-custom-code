@@ -11,6 +11,7 @@ import { initSlide6 } from "./slide6.js";
 import { initPopups } from "./popups.js";
 import { initSlide5 } from "./slide5.js";
 import { initPriceSlider } from "./priceSlider.js";
+import { PhoneNumberWithCountrySelect } from "./phoneNumberWithCountrySelect.js";
 
 // config settings
 window.vite = "vite";
@@ -26,10 +27,13 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 
   // init page slider
   const customSlider = pageSlider();
-  customSlider.slideTo(3);
+  // customSlider.slideTo(5);
 
   // step 1 logics
   initSlide0(customSlider);
+
+  // phone number with country select
+  PhoneNumberWithCountrySelect();
 
   $.ajax({
     url: settingsApi,
