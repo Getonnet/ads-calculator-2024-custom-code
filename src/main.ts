@@ -13,9 +13,6 @@ import { initSlide5 } from "./slide5.js";
 import { initPriceSlider } from "./priceSlider.js";
 import { PhoneNumberWithCountrySelect } from "./phoneNumberWithCountrySelect.js";
 
-// config settings
-window.vite = "vite";
-
 // api settings
 const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 
