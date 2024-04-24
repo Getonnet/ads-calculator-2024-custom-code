@@ -13,6 +13,30 @@ import { initSlide5 } from "./slide5.js";
 import { initPriceSlider } from "./priceSlider.js";
 import { PhoneNumberWithCountrySelect } from "./phoneNumberWithCountrySelect.js";
 
+type Prices = {
+  antallAnnonser: string;
+  besokende: string;
+  konverteringer: string;
+  visninger: string;
+  priceRange: { value: string }[];
+};
+type SettingsData = {
+  id: string;
+  title: string;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  lastUpdateBy: string | null;
+  stepOne: JSON;
+  stepTwo: JSON;
+  stepThree: JSON & { baseTotalDivideBy: number; costPerPlatform: number };
+  stepFour: Prices;
+  stepFive: JSON;
+  stepSix: JSON;
+  stepSeven: JSON;
+  stepEight: JSON;
+};
+
 // api settings
 const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 
@@ -20,7 +44,7 @@ const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
 (function ($) {
   console.log("LOCAL_SCRIPT_LOADED");
 
-  let settingsData = {};
+  let settingsData: SettingsData;
 
   // init page slider
   const customSlider = pageSlider();

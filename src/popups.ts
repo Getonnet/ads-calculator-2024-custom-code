@@ -1,5 +1,5 @@
 // general popup management
-export const initPopup = (popupTrigger, popup, popupContentWrapper, closePopupBtn) => {
+export const initPopup = (popupTrigger: JQuery, popup: JQuery, popupContentWrapper: JQuery, closePopupBtn: JQuery) => {
   popupTrigger.on("click", function (e) {
     e.preventDefault();
     popup.fadeIn();

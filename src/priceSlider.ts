@@ -32,8 +32,20 @@ import { getValues, setValue } from "./utils.js";
 // socialMedia:(8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
 // visninger:"45000"
 
-function findIndexInPriceRange(priceRange, number) {
-  const num = parseInt(number);
+type PriceRangeItem = {
+  value: string;
+};
+
+type Prices = {
+  antallAnnonser: string;
+  besokende: string;
+  konverteringer: string;
+  visninger: string;
+  priceRange: PriceRangeItem[];
+};
+
+function findIndexInPriceRange(priceRange: PriceRangeItem[], number: number | string) {
+  const num = typeof number === "string" ? parseFloat(number) : number;
   let closestIndex = -1;
   let minDiff = Infinity;
   for (let i = 0; i < priceRange.length; i++) {
@@ -55,7 +67,7 @@ function findIndexInPriceRange(priceRange, number) {
 }
 
 // used in step 4, slide 3
-export function initPriceSlider(prices, basePricePerPlatform) {
+export function initPriceSlider(prices: Prices, basePricePerPlatform: number) {
   const priceRange = prices["priceRange"];
   const { antallAnnonser, besokende, konverteringer, visninger } = prices;
   const ad_spend = Number(getValues("ad_spend"));
@@ -67,7 +79,7 @@ export function initPriceSlider(prices, basePricePerPlatform) {
   const $numberOfVisitors = currentStep.find(".number-of-visitors").first();
   const $numberOfConversion = currentStep.find(".number-of-conversion").first();
 
-  function getResultNum(budget, n) {
+  function getResultNum(budget: number, n: string): string {
     return ((budget * +n) / +basePricePerPlatform).toFixed(0);
   }
 
@@ -77,7 +89,7 @@ export function initPriceSlider(prices, basePricePerPlatform) {
   $numberOfConversion.text(getResultNum(ad_spend, konverteringer));
 
   // no-ui slider
-  const handlesSlider = document.getElementById("price-slider");
+  const handlesSlider = document.getElementById("price-slider") as HTMLInputElement;
 
   noUiSlider.create(handlesSlider, {
     start: findIndexInPriceRange(priceRange, ad_spend), // default value: based on figma design
