@@ -18,16 +18,16 @@ window.vite = "vite";
 
 // api settings
 const settingsApi = "https://marketing-calc-admin-2024.vercel.app/api/settings";
+const leadsApi = "https://marketing-calc-admin-2024.vercel.app/api/lead";
 
 // main script
 (function ($) {
   console.log("LOCAL_SCRIPT_LOADED");
-
   let settingsData = {};
 
   // init page slider
   const customSlider = pageSlider();
-  // customSlider.slideTo(5);
+  // customSlider.slideTo(3);
 
   // step 1 logics
   initSlide0(customSlider);
