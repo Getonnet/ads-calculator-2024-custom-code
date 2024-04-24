@@ -2,19 +2,29 @@ import noUiSlider from "nouislider";
 import { getValues, setValue } from "./utils.js";
 
 function findIndexInPriceRange(priceArr, target) {
-  let closestNum = priceArr.reduce((prev, curr) => {
-    return Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev;
-  });
-  return priceArr.indexOf(closestNum);
+  let closestNumIndex = -1;
+  let closestNumDiff = Infinity;
+
+  for (let i = 0; i < priceArr.length; i++) {
+    if (priceArr[i] >= target && Math.abs(priceArr[i] - target) < closestNumDiff) {
+      closestNumDiff = Math.abs(priceArr[i] - target);
+      closestNumIndex = i;
+    }
+  }
+
+  return closestNumIndex;
 }
 
 // used in step 4, slide 3
-export function initPriceSlider(prices, basePricePerPlatform) {
+export function initPriceSlider(customSlider, prices, basePricePerPlatform) {
   const priceRange = prices["budget"].map((price) => price.value);
-  console.log("initPriceSlider", prices);
-  console.log("initPriceSlider", priceRange);
+  // console.log("initPriceSlider", prices);
+  // console.log("initPriceSlider", priceRange);
   const { numberOfAds, pageVisitors, conversions, adViews } = prices;
   const ad_spend = Number(getValues("ad_spend"));
+  const ecommerce = Number(getValues("step2total"));
+  const platformsBaseSum = Number(getValues("step3Total"));
+  const currentTotal = ecommerce + platformsBaseSum + ad_spend;
 
   // .number-of-conversion, .number-of-visitors, .number-of-views, .number-of-ads
   const currentStep = $(".marketing-calc_content-wrapper_page-4");
@@ -24,7 +34,6 @@ export function initPriceSlider(prices, basePricePerPlatform) {
   const $numberOfConversion = currentStep.find(".number-of-conversion").first();
 
   function getResultNum(budget, n) {
-    console.log("getResultNum", budget);
     return ((+budget * +n) / +basePricePerPlatform).toFixed(0);
   }
 
@@ -37,7 +46,7 @@ export function initPriceSlider(prices, basePricePerPlatform) {
   const handlesSlider = document.getElementById("price-slider");
 
   noUiSlider.create(handlesSlider, {
-    start: findIndexInPriceRange(priceRange, ad_spend), // default value: based on figma design
+    start: findIndexInPriceRange(priceRange, currentTotal), // default value: based on figma design
     connect: [true, false],
     step: 1,
     range: {
@@ -58,7 +67,7 @@ export function initPriceSlider(prices, basePricePerPlatform) {
     setValue("step4", price);
 
     // update the numbers based on the price range
-    const newPrice = parseInt(price.replaceAll("+", "").replaceAll(" ", "").split(" - ")[0]);
+    const newPrice = parseInt(price.replaceAll("+", "").replaceAll(" ", ""));
     $numberOfAds.text(getResultNum(newPrice, numberOfAds));
     $numberOfViews.text(getResultNum(newPrice, adViews));
     $numberOfVisitors.text(getResultNum(newPrice, pageVisitors));
@@ -74,5 +83,13 @@ export function initPriceSlider(prices, basePricePerPlatform) {
     );
 
     $(".price-range").text(`${price} Kr`);
+  });
+
+  // on slide change update the price slider (if correct index)
+  customSlider.on("slideChange", function () {
+    if (customSlider.activeIndex === 3) {
+      const price = findIndexInPriceRange(priceRange, currentTotal);
+      handlesSlider.noUiSlider.set(price);
+    }
   });
 }

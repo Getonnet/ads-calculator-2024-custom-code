@@ -61,21 +61,6 @@ export function initSlide2(customSlider, prices) {
   });
 }
 
-// const step3Prices = {
-//   baseTotalDivideBy: 6,
-//   bing: 4760,
-//   costPerPlatform: 3000,
-//   facebook: 2975,
-//   facebookAndInstagram: 2975,
-//   google: 4760,
-//   googleAndBing: 7735,
-//   instagram: 2975,
-//   linkedIn: 2975,
-//   snapchat: 2975,
-//   tikTok: 2975,
-//   youtube: 2975,
-// };
-
 const priceMap = {
   "platform-google": "google",
   "platform-facebook": "facebook",
@@ -88,7 +73,7 @@ const priceMap = {
   "platform-others": "platform-others",
 };
 
-function getPlatformsTotal(values, prices) {
+export function getPlatformsTotal(values, prices) {
   if (values.length === 0 || values.includes("platform-others")) return 0;
 
   let total = 0;

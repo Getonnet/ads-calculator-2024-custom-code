@@ -27,7 +27,7 @@ const leadsApi = "https://marketing-calc-admin-2024.vercel.app/api/lead";
 
   // init page slider
   const customSlider = pageSlider();
-  // customSlider.slideTo(3);
+  customSlider.slideTo(3);
 
   // step 1 logics
   initSlide0(customSlider);
@@ -53,7 +53,7 @@ const leadsApi = "https://marketing-calc-admin-2024.vercel.app/api/lead";
 
       // step 4 logics + init price slider
       initSlide3(customSlider);
-      initPriceSlider(settingsData["stepFour"], settingsData["stepThree"]["costPerPlatform"]);
+      initPriceSlider(customSlider, settingsData["stepFour"], settingsData["stepThree"]["costPerPlatform"]);
 
       // step 5 logics
       initSlide4(customSlider);
